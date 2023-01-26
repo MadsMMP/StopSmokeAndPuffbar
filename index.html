@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StopIt</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <style>
+        .card {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-12">
+              <div class="jumbotron jumbotron-fluid text-center">
+                  <h1 class="display-4">Quit smoking and using puff bar</h1>
+                  <p class="lead">Take the first step towards a healthier life</p>
+              </div>
+          </div>
+      </div>
+  </div>
+
+  <div class="container">
+      <div class="row">
+          <div class="col-md-6">
+              <div class="card">
+                  <div class="card-header">
+                      Puff Bar
+                  </div>
+                  <div class="card-body">
+                      <p>A Puff Bar is a disposable electronic cigarette that is meant to be used once and then thrown away. They are small and easy to use, but they can be expensive and harmful to your health.</p>
+                      <form id="puffBarForm">
+                        <div class="form-group">
+                            <label for="puffCount">How many puffs do you take per day?</label>
+                            <input type="number" class="form-control" id="puffCount" placeholder="Enter number of puffs">
+                        </div>
+                        <div class="form-group">
+                            <label for="timePerPuff">How long does each puff take (in seconds)?</label>
+                            <input type="number" class="form-control" id="timePerPuff" placeholder="Enter time per puff in seconds">
+                        </div>
+                        <button type="button" class="btn btn-primary" id="calculateButton">Calculate</button>
+                    </form>
+                      <div id="puffBarResult" class="alert alert-primary" role="alert" style="display: none; margin-top: 10px;"></div>
+                  </div>
+              </div>
+          </div>
+        <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                Smoking
+            </div>
+            <div class="card-body">
+                <p>Smoking cigarettes is a leading cause of preventable death and disease worldwide. It harms nearly every organ in your body and shortens your lifespan.</p>
+                <form id="smokingForm">
+                    <div class="form-group">
+                        <label for="smokingTime">How many cigarettes do you smoke per day?</label>
+                        <input type="number" class="form-control" id="smokingTime" placeholder="Enter number of cigarettes">
+                    </div>
+                    <button type="button" class="btn btn-primary" onclick="calculateSmokingTime()">Calculate</button>
+                </form>
+                <div id="smokingResult" class="alert alert-primary" role="alert" style="display: none; margin-top: 10px;"></div>
+            </div>
+        </div>
+    </div>
+
+        <div class="container-fluid">
+          <div class="row">
+              <div class="col-md-4">
+                  <div class="card">
+                      <img src="banner1.jpg" class="card-img-top" alt="Banner 1">
+                  </div>
+              </div>
+              <div class="col-md-4">
+                  <div class="card">
+                      <img src="banner2.jpg" class="card-img-top" alt="Banner 2">
+                  </div>
+              </div>
+              <div class="col-md-4">
+                  <div class="card">
+                      <img src="banner3.jpg" class="card-img-top" alt="Banner 3">
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <script>
+        //variables to store the input and output
+        let puffCount;
+        let timePerPuff;
+        let puffBarResult = document.getElementById("puffBarResult");
+     
+        function calculatePuffBarTime() {
+            puffCount = document.getElementById("puffCount").value;
+            timePerPuff = document.getElementById("timePerPuff").value;
+            if(!puffCount || !timePerPuff || puffCount <= 0 || timePerPuff <= 0) {
+                puffBarResult.innerHTML = "Please enter a valid number of puffs and time per puff.";
+            } else {
+                let timeLost = puffCount * timePerPuff; 
+                puffBarResult.innerHTML = "You lose " + timeLost + " minutes of your life to puffing every day!";
+                puffBarResult.style.display = "block";
+            }
+        }
+        //event listener for the form submission
+        document.getElementById("puffBarForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+            calculatePuffBarTime();
+        });
+    
+        //event listener for the calculate button
+        document.getElementById("calculateButton").addEventListener("click", function() {
+            calculatePuffBarTime();
+        });
+    </script>
+    
+    
+    <script>
+        function calculateSmokingTime() {
+            let smokingTime = document.getElementById("smokingTime").value;
+            let smokingResult = document.getElementById("smokingResult");
+            let timeLost = smokingTime * 2; // assuming 2 minutes per cigarette
+            smokingResult.innerHTML = "You have lose " + timeLost + " minutes of your life to to smoking every day!";
+            smokingResult.style.display = "block";
+        }
+    </script>
+
+</body>
+</html>
+
+    
+      
+        
