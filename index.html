@@ -16,22 +16,24 @@
 </head>
 
 <body>
-  <div class="container-fluid">
-      <div class="row">
-          <div class="col-12">
-              <div class="jumbotron jumbotron-fluid text-center">
-                  <h1 class="display-4">Quit smoking and using puff bar</h1>
-                  <p class="lead">Take the first step towards a healthier life</p>
-              </div>
-          </div>
-      </div>
-  </div>
+            <!-- START BANNER -->
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="jumbotron jumbotron-fluid text-center">
+                            <h1 class="display-4">Quit smoking and using puff bar</h1>
+                            <p class="lead">Take the first step towards a healthier life</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-  <div class="container">
-      <div class="row">
-          <div class="col-md-6">
-              <div class="card">
-                  <div class="card-header">
+            <!-- PUFF BAR -->
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                <div class="card">
+                <div class="card-header">
                       Puff Bar
                   </div>
                   <div class="card-body">
@@ -51,25 +53,30 @@
                   </div>
               </div>
           </div>
-        <div class="col-md-6">
-        <div class="card">
-            <div class="card-header">
-                Smoking
-            </div>
-            <div class="card-body">
-                <p>Smoking cigarettes is a leading cause of preventable death and disease worldwide. It harms nearly every organ in your body and shortens your lifespan.</p>
-                <form id="smokingForm">
-                    <div class="form-group">
-                        <label for="smokingTime">How many cigarettes do you smoke per day?</label>
-                        <input type="number" class="form-control" id="smokingTime" placeholder="Enter number of cigarettes">
-                    </div>
-                    <button type="button" class="btn btn-primary" onclick="calculateSmokingTime()">Calculate</button>
-                </form>
-                <div id="smokingResult" class="alert alert-primary" role="alert" style="display: none; margin-top: 10px;"></div>
+
+          <!-- SMOKING -->
+          <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    Smoking
+                </div>
+                <div class="card-body">
+                    <p>Smoking cigarettes is a leading cause of preventable death and disease worldwide. It harms nearly every organ in your body and shortens your lifespan.</p>
+                    <form id="smokingForm">
+                        <div class="form-group">
+                            <label for="smokingTime">How many cigarettes do you smoke per day?</label>
+                            <input type="number" class="form-control" id="smokingTime" placeholder="Enter number of cigarettes">
+                        </div>
+                        <button id="smokingCalculateButton" type="button" class="btn btn-primary">Calculate</button>
+                    </form>
+                    <div id="smokingResult" class="alert alert-primary" role="alert" style="display: none; margin-top: 10px;"></div>
+                    <div id="smokingRisk" class="alert alert-danger" role="alert" style="display: none; margin-top: 10px;"></div>
+                </div>
             </div>
         </div>
-    </div>
-
+    
+    
+        <!-- AD BANNERS -->
         <div class="container-fluid">
           <div class="row">
               <div class="col-md-4">
@@ -90,6 +97,7 @@
           </div>
       </div>
 
+      <!-- SCRIPT - PUFF BAR -->
       <script>
         //variables to store the input and output
         let puffCount;
@@ -119,20 +127,31 @@
         });
     </script>
     
-    
+    <!-- SCRIPT - SMOKING -->
     <script>
         function calculateSmokingTime() {
             let smokingTime = document.getElementById("smokingTime").value;
             let smokingResult = document.getElementById("smokingResult");
             let timeLost = smokingTime * 2; // assuming 2 minutes per cigarette
-            smokingResult.innerHTML = "You have lose " + timeLost + " minutes of your life to to smoking every day!";
+            smokingResult.innerHTML = "You lose " + timeLost + " minutes of your life to to smoking every day!";
             smokingResult.style.display = "block";
+            
+            // Estimate the increased risk of certain health conditions associated with smoking
+            let cigarettesPerDay = smokingTime;
+            let lungCancerRisk = (cigarettesPerDay * 20) / 20;
+            let heartDiseaseRisk = (cigarettesPerDay * 25) / 20;
+            let strokeRisk = (cigarettesPerDay * 30) / 20;
+    
+            smokingResult.innerHTML += "<br> Your estimated increased risk of lung cancer is " + lungCancerRisk + "%.<br>" +
+                                          "Your estimated increased risk of heart disease is " + heartDiseaseRisk + "%.<br>" +
+                                          "Your estimated increased risk of stroke is " + strokeRisk + "%.";
         }
+        document.getElementById("smokingCalculateButton").addEventListener("click", function() {
+        calculateSmokingTime();
+        calculateSmokingRisk();
+    });
+
     </script>
 
 </body>
 </html>
-
-    
-      
-        
